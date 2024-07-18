@@ -22,8 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MyWeatherApp(modifier: Modifier) {
-    var searchByName by remember { mutableStateOf("") }
+fun MyWeatherApp(modifier: Modifier,viewModel: WeatherViewModel) {
+    var City by remember { mutableStateOf("") }
     Column(modifier = Modifier.fillMaxSize().padding(30.dp),
      horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -34,11 +34,11 @@ fun MyWeatherApp(modifier: Modifier) {
         ) {
             OutlinedTextField(
                 modifier = Modifier.weight(1f),
-                value = searchByName, onValueChange =
-            {searchByName = it},
+                value = City, onValueChange =
+            {City = it},
                 label = {Text("Search ")}
              )
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = {viewModel.getData(City)}) {
                 Icon(imageVector = Icons.Default.Search, contentDescription = null)
             }
         }
